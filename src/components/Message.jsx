@@ -14,29 +14,31 @@ function Message() {
     const auctionRef = useRef(null);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("show");
-                    } else {
-                        entry.target.classList.remove("show");
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+  const currentElement = auctionRef.current; // 👈 capture once
 
-        if (auctionRef.current) {
-            observer.observe(auctionRef.current);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        } else {
+          entry.target.classList.remove("show");
         }
+      });
+    },
+    { threshold: 0.1 }
+  );
 
-        return () => {
-            if (auctionRef.current) {
-                observer.unobserve(auctionRef.current);
-            }
-        };
-    }, []);
+  if (currentElement) {
+    observer.observe(currentElement);
+  }
+
+  return () => {
+    if (currentElement) {
+      observer.unobserve(currentElement); // 👈 use captured value
+    }
+  };
+}, []);
 
     return (
         <div className="message-panel">

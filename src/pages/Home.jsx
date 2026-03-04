@@ -284,7 +284,59 @@ if (activeTab === "Favourite") {
     );
 }
 
+if (activeTab === "Settings") {
+    return (
+        <motion.div className="user-settings-wrapper" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
+            
+            <div className="settings-header-box">
+                <h1>Account <span>Settings</span></h1>
+                <p>Manage your profile, wallet, and notification preferences.</p>
+            </div>
 
+            <div className="settings-grid-layout">
+                <div className="settings-panel profile-panel">
+                    <h3>Profile Information</h3>
+                    <div className="avatar-edit-row">
+                        <div className="user-avatar-preview"></div>
+                        <button className="change-avatar-btn">Change Avatar</button>
+                    </div>
+                    
+                    <div className="input-group-stack">
+                        <div className="form-field">
+                            <label>Display Name</label>
+                            <input type="text" className="settings-input" placeholder="Ragnarok_Collector" />
+                        </div>
+                        
+                        <div className="form-field">
+                            <label>Email Address</label>
+                            <input type="email" className="settings-input" placeholder="user@example.com" />
+                        </div>
+                    </div>
+                </div>
+                <div className="settings-sidebar-stack">
+                    <div className="settings-panel notification-panel">
+                        <h4>Notifications</h4>
+                        {['Email on Sale', 'Bid Alerts', 'New Drops'].map((item) => (
+                            <div key={item} className="toggle-row">
+                                <span className="toggle-label">{item}</span>
+                                <div className="custom-toggle-switch active"></div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="wallet-card-highlight">
+                        <h4>Connected Wallet</h4>
+                        <p className="wallet-address">0x71C...4f39</p>
+                        <button className="disconnect-wallet-btn">Disconnect Wallet</button>
+                    </div>
+                </div>
+            </div>
+            <button className="main-save-changes-btn">
+                Save Changes
+            </button>
+        </motion.div>
+    );
+}
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
